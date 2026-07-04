@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shaki Saptiadi Putra</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #121212;       /* Very dark gray/near black */
+      --primary: #007bff;        /* Deep, classic blue */
+      --secondary: #6c757d;     /* Muted gray for secondary info */
+      --text: #e0e0e0;           /* Off-white for readability */
+      --accent: #ffc107;         /* Rich gold/amber for highlights */
+      --card-bg: rgba(255, 255, 255, 0.03); /* Very subtle transparency for cards */
+      --border-color: rgba(255, 255, 255, 0.08); /* Darker, subtle border */
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--bg-color);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: linear-gradient(180deg, var(--bg-color) 0%, #1a1a1a 100%);
+      border-bottom: 1px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(0, 123, 255, 0.08) 0%, transparent 70%);
+      animation: pulse 15s infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.8); opacity: 0.5; }
+      100% { transform: scale(1.2); opacity: 0.8; }
+    }
+
+    header img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--primary);
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 20px rgba(0, 123, 255, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    header img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(0, 123, 255, 0.5);
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      text-shadow: 0 0 15px rgba(0, 123, 255, 0.4);
+      letter-spacing: 1px;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: var(--secondary);
+      margin-top: 0.5rem;
+      opacity: 0.9;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--primary);
+      padding-bottom: 0.75rem;
+      position: relative;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 50px;
+      height: 2px;
+      background-color: var(--accent);
+    }
+
+    h3 {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.4rem;
+      color: var(--primary);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px dashed var(--border-color);
+    }
+
+    h4 {
+      font-size: 1.15rem;
+      color: var(--secondary);
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    ul, ol {
+      list-style-position: inside;
+      margin-left: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    li {
+      margin-bottom: 0.6rem;
+      color: var(--text);
+    }
+
+    li strong {
+      color: var(--secondary);
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      margin-top: 4rem;
+      font-size: 0.9rem;
+      color: var(--secondary);
+      border-top: 1px solid var(--border-color);
+      opacity: 0.8;
+    }
+
+    .section.reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .section.reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .collapsible-header {
+      cursor: pointer;
+      padding: 0.75rem 0;
+      color: var(--accent);
+      font-size: 1.5rem;
+      font-family: 'Playfair Display', serif;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: color 0.3s ease;
+    }
+
+    .collapsible-header:hover {
+      color: var(--primary);
+    }
+
+    .collapsible-header::after {
+      content: '+';
+      font-size: 1.8rem;
+      transition: transform 0.3s ease;
+    }
+
+    .collapsible-header.active::after {
+      content: '-';
+      transform: rotate(180deg);
+    }
+
+    .collapsible-content {
+      display: none;
+      padding-left: 1rem;
+      border-left: 2px solid var(--primary);
+      margin-top: 1rem;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    .collapsible-header.active + .collapsible-content {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+
+      header p {
+        font-size: 1rem;
+      }
+
+      main {
+        padding: 0 1rem;
+      }
+
+      section {
+        padding: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+      }
+
+      h3 {
+        font-size: 1.2rem;
+      }
+
+      .collapsible-header {
+        font-size: 1.3rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header img {
+        width: 150px;
+        height: 150px;
+      }
+
+      header h1 {
+        font-size: 1.8rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      h3 {
+        font-size: 1.1rem;
+      }
+      .collapsible-content {
+        padding-left: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="profpic.png" alt="Shaki S. Putra"/>
+    <h1>Shaki Saptiadi Putra</h1>
+    <p>Lecturer at Universitas Malikussaleh</p>
+  </header>
+
+  <main>
+    <section class="section reveal">
+      <h2 class="collapsible-header">1. Personal Information</h2>
+      <div class="collapsible-content">
+        <ul>
+          <li><strong>Full Name:</strong> Ir. Shaki Saptiadi Putra, S.T., M.Eng., IPP.</li>
+          <li><strong>Nationality:</strong> Indonesia</li>
+          <li><strong>Gender:</strong> Male</li>
+          <li><strong>Place & Date of Birth:</strong> Padang, May 25th 1996</li>
+          <li><strong>Company:</strong> Universitas Malikussaleh</li>
+          <li><strong>Current Position:</strong> Lecturer</li>
+          <li><strong>Email:</strong> shakisaptiadi@unimal.ac.id</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <h2 class="collapsible-header">2. Education and Professional Qualification</h2>
+      <div class="collapsible-content">
+        <h3 class="collapsible-header">2.1 Academic Qualification</h3>
+        <div class="collapsible-content">
+          <ul>
+            <li>Master of Engineering (M.Eng.), Engineering Physics UGM – 2023</li>
+            <li>Bachelor of Engineering (S.T.), Engineering Physics UGM – 2019</li>
+          </ul>
+        </div>
+
+        <h3 class="collapsible-header">2.2 Professional Qualification</h3>
+        <div class="collapsible-content">
+          <ul>
+            <li>Professional Engineer (Ir.), UGM – 2024</li>
+            <li>Junior Professional Engineer (IPP), PII – 2024</li>
+          </ul>
+        </div>
+        
+        <h3 class="collapsible-header">2.3 Work & Internship Experience</h3>
+        <div class="collapsible-content">
+          <h4>2.3.1 Work Experience</h4>
+          <ul>
+            <li>Lecturer – Universitas Malikussaleh (2025–Present)</li>
+            <li>System Analyst – PT. Sangkar Sari Teknologi (2023–2025)</li>
+            <li>PT. Datto Asia Teknologi
+              <ul>
+                <li>Project Manager (2020–2025)</li>
+                <li>IoT Engineer (2018–2020)</li>
+              </ul>
+            </li>
+          </ul>
+          <h4>2.3.2 Internship Experience</h4>
+          <ul>
+              <li>Intern – PT. Dirgantara Indonesia, Electric Box Assembly (2018)</li>
+              <li>Intern – PT. Datto Asia Teknologi, IoT Division (2017)</li>
+          </ul>
+        </div>
+        
+        <h3 class="collapsible-header">2.4. Skill and Portfolio</h3>
+        <div class="collapsible-content">
+          <h4 class="collapsible-header">2.4.1 Field of specialization:</h4>
+          <div class="collapsible-content">
+            <ul>
+              <li><strong>IoT:</strong> HTTP, MQTT, WebSocket, LoRa, BLE, ESP-Now</li>
+              <li><strong>Microcontroller:</strong> Arduino, ESP32, Cypress PSoC 5LP</li>
+              <li><strong>Single Board Computer:</strong> Raspberry Pi 2/3/4, Nvidia Jetson Nano/AGX</li>
+              <li><strong>Sensor System:</strong> Analog, One-Wire, I2C, SPI, UART, MODBUS</li>
+              <li><strong>Database Management System:</strong> MySQL, PostgreSQL, SQLite, MongoDB</li>
+              <li><strong>Web Development:</strong> PHP Native, Laravel, CodeIgniter, Django, Flask, FastAPI, ExpressJS, ReactJs, Gin</li>
+              <li><strong>CI/CD:</strong> Docker, Git</li>
+              <li><strong>Computer Vision and AI:</strong> OpenCV, TensorFlow, PyTorch</li>
+              <li><strong>Building Management System</strong></li>
+              <li><strong>Biomedical Instrumentation System</strong></li>
+              <li><strong>Early Warning System</strong></li>
+            </ul>
+          </div>
+
+          <h4 class="collapsible-header">2.4.2 Programming Languages:</h4>
+          <div class="collapsible-content">
+            <ul>
+              <li>C/C++</li>
+              <li>C#</li>
+              <li>Python</li>
+              <li>PHP</li>
+              <li>Javascript</li>
+              <li>SQL</li>
+              <li>Bash Script</li>
+              <li>Go</li>
+            </ul>
+          </div>
+
+          <h4 class="collapsible-header">2.4.3 Portfolio</h4>
+          <div class="collapsible-content">
+            <ul>
+              <li>2025 – IoT System for Trapcamera in Wildlife Conservation<br>Client: Faculty of Forestry UGM</li>
+              <li>2025 – Software Development for Tree Health and Wood Quality Assessment<br>Client: Faculty of Forestry UGM</li>
+              <li>2025 – Renewable Energy Monitoring System on Dinas Ketenagakerjaan dan Energi Sumber Daya Mineral Provinsi Bali<br>Client: CeDSGreeB UGM</li>
+              <li>2024 – Smart Transformer Monitoring System<br>Client: Faculty of Information Technology UKSW</li>
+              <li>2024 – Composter Monitoring System<br>Client: Faculty of Engineering UGM</li>
+              <li>2024 – Centralized Waste and Junk Monitoring System<br>Client: Faculty of Engineering UGM</li>
+              <li>2024 – Reliability Test for Magnetic and Mechanic Switch in Valve Monitoring System<br>Client: PT. Pertamina Hulu Rokan</li>
+              <li>2023 – Early Warning System for Earthquake in Indonesia<br>Client: PT. Telekomunikasi Indonesia</li>
+              <li>2023 – Thermal Camera Imaging for Hypnotic Guided Imagery<br>Client: Faculty of Psychology (RISPRO LPDP UGM)</li>
+              <li>2023 – Hazardous Gas Monitoring System in Mining Area using LSTM Algorithm<br>Client: Faculty of Information Technology UKSW</li>
+              <li>2022 – Early Warning System for Avalanche<br>Client: Vocational College UGM</li>
+              <li>2022 – Building Management System<br>Client: Department of Nuclear Engineering and Engineering Physics UGM</li>
+              <li>2021 – Charging Station System for Electric Vehicle<br>Client: PT. Wika Industri Manufaktur</li>
+              <li>2021 – Building Management System Prototype<br>Client: Department of Engineering Physics UMN</li>
+              <li>2020 – Data Acquisition System for Covid-19 Suspects' Vital Sign Parameters<br>Client: Riset Merah Putih (BRIN Research Fund for Covid-19 Solution) </li>
+              <li>2020 – News, Information, and Forum Web Application for Workers (<a href="https://naker.news" target="_blank">naker.news</a>)<br>Client: PT. Pratama Multi Karya Cipta</li>
+              <li>2020 – Regional Building Management System Prototype at SMKN 3 Yogyakarta<br>Client: INSGREEB UGM</li>
+              <li>2020 – Indoor Environment Monitoring System at AMC Hospital<br>Client: INSGREEB UGM</li>
+              <li>2019 – Jaw Clicking Sound Measurement System<br>Client: Faculty of Dentistry UGM</li>
+              <li>2018 – BMI Measurement System for Elderly and Disabled<br>Client: Faculty of Medicine and Health Sciences UMY</li>
+            </ul>
+          </div>
+        </div>
+        
+        <h3 class="collapsible-header">2.5 Research Achievements</h3>
+        <div class="collapsible-content">
+          <strong>Intellectual Property Rights (IPRs)</strong>
+          <ol>
+            <li>2026 – Virtual Lab Fisika Mekanika dan Termodinamika Berbasis Web.<br>HaKI Number: EC002026002016</li>
+            <li>2025 – Virtual Lab Sistem Kendali Motor Listrik DC Berbasis Web.<br>HaKI Number: EC002025199129</li>
+            <li>2023 – Video Implementasi Sistem “Lingkungan Sehat dalam Bangunan Hemat Energi”.<br>HaKI Number: EC00202374695</li>
+            <li>2022 – Platform Pendukung Tata Kelola “Lingkungan Sehat dalam Bangunan Hemat Energi”.<br>HaKI Number: EC00202223032</li>
+            <li>2020 – Instrumen Evaluasi Kenyamanan Termal Lingkungan Ruang Huni.<br>Patent Number: P00202003280</li>
+          </ol>
+          <strong>Publications</strong>
+          <ol>
+            <li>2026 - Putra, Shaki S.; Sari, Hermin Kartika; Pratama, Thomas Oka; Putra, Reza. "Feasibility and Technical Reliability Study of a Standalone Rooftop Solar Power Plant System Using Python Pvlib: A Case Study on Renewable Energy Engineering Laboratory Building of Universitas Malikussaleh". <a href="https://garuda.kemdiktisaintek.go.id/documents/detail/6223391">LINK</a></li>
+            <li>2025 - Shaki Saptiadi Putra, Muhammad Nuzan Rizki, Abdul Rahman. "Web-Based Virtual Lab for DC Motor Control: Implementing RK4 and Anti-Windup PID Strategies". <a href="https://garuda.kemdiktisaintek.go.id/documents/detail/5851520">LINK</a></li>
+            <li>2025 - Ikhsan, Maulana; Putra, Shaki S.; Hasanuddin, AR Fuad; Hadi, Misbul; Phoenna, Riezky Poetra; Nawaf, Abdul Razak. "Transformasi Pengetahuan ke Keterampilan: Literasi Keuangan Siswa Kelas XII Dayah Al-Muslimun Melalui Simulasi Anggaran". <a href="https://garuda.kemdiktisaintek.go.id/documents/detail/5517828">LINK</a></li>
+            <li>2023 – S. S. Putra, S. S. Utami, W. Setyonugroho, and R. J. Yanti. “Development of a Data Acquisition System (DAQ) of a low-cost health monitoring system for Covid-19 Suspects”. <a href="https://doi.org/10.1063/5.0122977" target="_blank">LINK</a></li>
+          </ol>
+        </div>
+
+        <h3 class="collapsible-header">2.6 Academic Services</h3>
+        <div class="collapsible-content">
+          <h4 class="collapsible-header">2.6.1 Lecturer</h4>
+          <div class="collapsible-content">
+            <ol>
+              <li><strong>Department of Mechanical Engineering Universitas Malikussaleh, 2025 – Present</strong></li>
+            </ol>
+            <ul>
+              <li>Freshman Year: Physics I, Labwork of Physics</li>
+              <li>Sophomore Year: Programming Logic, Numerical Analysis, Electrical Power</li>
+              <li>Junior Year: Control System</li>
+            </ul>
+          </div>
+          
+          <h4 class="collapsible-header">2.6.2 Labwork Instructor</h4>
+          <div class="collapsible-content">
+            <ul>
+              <li>Review and revise the labwork module according to the course syllabus</li>
+              <li>Review and formulate the weight of assessment points based on the CPMK of the course</li>
+              <li>Supervise the labwork process</li>
+              <li>Review and revise the labwork final assignment concept</li>
+              <li>Supervise the assistant instructor coordinator</li>
+            </ul>
+            <ol>
+              <li><strong>DTNTF UGM, 2019 – 2023</strong><br>Course: Labwork of Measurement System<br>Lecturer:<br>- Prof. Dr. Ir. Faridah, S.T., M.Sc., IPU<br>- Dr. Ir. Nur Abdillah Siddiq, S.T., IPP<br>- Dr. Eng. Ir. Dwi Joko Suroso, S.T., M.Eng., IPP.</li>
+              <li><strong>DTNTF UGM, 2019 – 2023</strong><br>Course: Labwork of Basic Electronics<br>Lecturer: Prof. Dr. Ir. Faridah, S.T., M.Sc., IPU</li>
+              <li><strong>DTNTF UGM, 2022 – 2023</strong><br>Course: Labwork of Electronics (for Nuclear Engineering)<br>Lecturer: Prof. Dr. Ir. Faridah, S.T., M.Sc., IPU</li>
+            </ol>
+          </div>
+
+          <h4 class="collapsible-header">2.6.3 Assistant Lecturer</h4>
+          <div class="collapsible-content">
+            <ul>
+              <li>Prepare the tutorial module</li>
+              <li>Provide tutorials on lecture material to students</li>
+              <li>Provide final project assignment tutorials to students</li>
+              <li>Grade student assignments</li>
+            </ul>
+            <ol>
+              <li><strong>DTNTF UGM, 2020 – 2023</strong><br>Course: Microprocessors Application<br>Lecturer: Prof. Ir. Nazrul Effendy, S.T., M.T., Ph.D., IPM</li>
+              <li><strong>DTNTF UGM, 2018 – 2022</strong><br>Course: Database System<br>Lecturer:<br>- Fadli Kasim, S.T., M.Sc.<br>- Dr. Eng. Ir. Dwi Joko Suroso, S.T., M.Eng., IPP.</li>
+              <li><strong>DTNTF UGM, 2024 – 2025</strong><br>Course: Realtime System<br>Lecturer: Yakub Fahim Luckyarno, S.T., M.Eng.</li>
+              <li><strong>DTNTF UGM, 2024 – 2025</strong><br>Course: Building Automation<br>Lecturer:<br>- Prof. Dr. Ir. Faridah, S.T., M.Sc., IPU<br>- Dr. Eng. Ir. Dwi Joko Suroso, S.T., M.Eng., IPP.</li>
+            </ol>
+          </div>
+
+          <h4 class="collapsible-header">2.6.4 Labwork Assistant Instructor Coordinator</h4>
+          <div class="collapsible-content">
+            <ul>
+              <li>Provide direction to assistant instructor regarding assessment and grading aspects</li>
+              <li>Provide Training of Trainers (ToT) to assistant instructor</li>
+              <li>Prepare the experiments setup based on the directions of the labwork instructor</li>
+              <li>Assessing students performance</li>
+              <li>Design the labwork final assignment concept</li>
+            </ul>
+            <ol>
+              <li><strong>DTNTF UGM, 2022 – 2025</strong><br>Course: Labwork of Instrumentation System<br>Lecturer:<br>- Prof. Ir. Sunarno, M.Eng., Ph.D., IPU<br>- Dr. Eng. Ir. Dwi Joko Suroso, S.T., M.Eng., IPP.<br>- Thomas Oka Pratama, S.T., M.Eng.</li>
+              <li><strong>DTNTF UGM, 2020 – 2024</strong><br>Course: Labwork of Digital Electronics / Digital System<br>Lecturer:<br>- Prof. Ir. Sunarno, M.Eng., Ph.D., IPU<br>- Thomas Oka Pratama, S.T., M.Eng.</li>
+              <li><strong>DTNTF UGM, 2020 – 2024</strong><br>Course: Labwork of Communication Network / Data Communication<br>Lecturer:<br>- Prof. Ir. Sunarno, M.Eng., Ph.D., IPU<br>- Thomas Oka Pratama, S.T., M.Eng.</li>
+              <li><strong>DTNTF UGM, 2017 – 2018</strong><br>Course: Labwork of Computer Programming<br>Lecturer: Ir. Agus Arif, M.T.</li>
+            </ol>
+          </div>
+
+          <h4 class="collapsible-header">2.6.5 Labwork Assistant Instructor</h4>
+          <div class="collapsible-content">
+            <ul>
+              <li>Provide tutorials on labwork material to students</li>
+              <li>Grade student assignments</li>
+            </ul>
+            <ol>
+              <li><strong>DTNTF UGM, 2017 – 2020</strong><br>Course: Labwork of Communication Network / Data Communication<br>Lecturer: Prof. Ir. Sunarno, M.Eng., Ph.D., IPU</li>
+              <li><strong>DTNTF UGM, 2017 – 2020</strong><br>Course: Labwork of Digital Electronics / Digital System<br>Lecturer: Prof. Ir. Sunarno, M.Eng., Ph.D., IPU</li>
+              <li><strong>DTNTF UGM, 2017 – 2018</strong><br>Course: Labwork of Sensor and Actuator System<br>Lecturer: Dr.-Ing. Ir. Awang Noor Indra Wardana, S.T., M.T., M.Sc., IPM</li>
+              <li><strong>DTNTF UGM, 2016 – 2017</strong><br>Course: Labwork of Computer Programming<br>Lecturer: Ir. Agus Arif, M.T.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <h2 class="collapsible-header">3. Organizations</h2>
+      <div class="collapsible-content">
+        <h3>3.1 Professional Organization</h3>
+        <ul>
+          <li>Member – The Institution of Engineers Indonesia (PII) (2024–Present)</li>
+        </ul>
+
+        <h3>3.2 Student Organization</h3>
+        <ul>
+          <li>AVANTE – Adventurer and Environmentalist Society (2013–2018)</li>
+          <li>KMTF – Keluarga Mahasiswa Teknik Fisika (2013–2016)</li>
+          <li>KMT / KAMADZ – Muslim Student Associations (2013–2015)</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 ShakiDC. All rights reserved.
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll(".reveal");
+    window.addEventListener("scroll", () => {
+      for (let i = 0; i < reveals.length; i++) {
+        const windowHeight = window.innerHeight;
+        const revealTop = reveals[i].getBoundingClientRect().top;
+        if (revealTop < windowHeight - 100) {
+          reveals[i].classList.add("active");
+        }
+      }
+    });
+
+    document.querySelectorAll('.collapsible-header').forEach(header => {
+      header.addEventListener('click', () => {
+        // Toggle active class on the header itself
+        header.classList.toggle('active');
+        
+        // Find the immediate sibling .collapsible-content
+        let content = header.nextElementSibling;
+
+        // If the clicked header is a top-level H2, find its associated content
+        // Otherwise, it's a nested H3 or H4, so the next sibling is correct.
+        if (header.tagName === 'H2') {
+            content = header.nextElementSibling;
+        } else {
+            // For nested headers (H3, H4), we still look for the immediate sibling
+            content = header.nextElementSibling;
+        }
+
+        if (content) { // Ensure content exists
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        }
+      });
+    });
+
+    // Initialize all top-level collapsible content to be hidden
+    document.querySelectorAll('main > section > .collapsible-content').forEach(content => {
+      content.style.display = 'none';
+    });
+    // Set all top-level headers to inactive initially
+    document.querySelectorAll('main > section > .collapsible-header').forEach(header => {
+      header.classList.remove('active');
+    });
+
+    // Make the first section (Personal Information) visible by default
+    const firstSectionHeader = document.querySelector('main > section:first-of-type > .collapsible-header');
+    if (firstSectionHeader) {
+      firstSectionHeader.classList.add('active');
+      const firstSectionContent = firstSectionHeader.nextElementSibling;
+      if (firstSectionContent) {
+        firstSectionContent.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
